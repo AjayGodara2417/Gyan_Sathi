@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+.font-hand {
+  font-family: 'Patrick Hand', cursive;
+}
+
+
+/* 
+:root {
+  --background: #cf2626;
+  --foreground: #171717;
+  --primary-color: #ff6b6b;
+  --secondary-color: #f7f7f7;
+  --accent-color: #ffcc00;
+  --font-sans: "Inter", Arial, Helvetica, sans-serif;
+  --font-mono: "Fira Code", monospace;
+  --border-radius: 8px;
+  --transition-speed: 0.3s;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #121212;
+    --foreground: #f5f5f5;
+    --primary-color: #4caf50;
+    --secondary-color: #1e1e1e;
+    --accent-color: #ff9800;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  transition: background var(--transition-speed), color var(--transition-speed);
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color var(--transition-speed);
+}
+
+a:hover {
+  color: var(--accent-color);
+}
+
+button {
+  background: var(--primary-color);
+  color: var(--foreground);
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 0.5rem 1rem;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: background var(--transition-speed), transform var(--transition-speed);
+}
+
+button:hover {
+  background: var(--accent-color);
+  transform: scale(1.05);
+}
+
+input, textarea {
+  border: 1px solid var(--secondary-color);
+  border-radius: var(--border-radius);
+  padding: 0.5rem;
+  font-family: var(--font-sans);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 4px var(--primary-color);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 90%;
+  }
+
+  .container {
+    padding: 0.5rem;
+  }
+} */
