@@ -128,7 +128,7 @@ export default function NotesPage() {
         <label className="block mb-4">
           Select File:
           <CldUploadButton
-            uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_PRESET_NAME!}
+            uploadPreset={"gyansathinext"}
             onSuccess={handleUploadSuccess}
             className="mt-2 bg-blue-600 text-white py-2 px-4 rounded"
           />
@@ -146,8 +146,8 @@ export default function NotesPage() {
       {/* Show uploaded notes */}
       {/* Search Bar */}
 <div className="mt-12 mb-4 flex justify-between items-center border border-white p-3 rounded-lg">
-  <h2 className="text-xl font-bold">Gyan Saathi</h2>
-  <div className="flex items-center gap-2 bg-blue-900 px-4 py-2 rounded-md w-full max-w-md">
+  <h2 className="text-2xl font-extrabold text-black">Gyan Saathi</h2>
+  <div className="flex items-center gap-2 ml-2 bg-blue-900 px-4 py-2 rounded-md w-full max-w-md">
     <input
       type="text"
       placeholder="Search by title..."
