@@ -1,4 +1,3 @@
-// app/discussion/[channel]/page.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -30,7 +29,7 @@ export default function ChannelDiscussion() {
       author: "Student",
       question,
     });
-    
+
     setQuestion("");
     fetchPosts();
     setLoading(false);
@@ -43,7 +42,7 @@ export default function ChannelDiscussion() {
       text,
       author: "User",
     });
-    
+
     fetchPosts();
   };
 
@@ -52,33 +51,51 @@ export default function ChannelDiscussion() {
   }, [channel]);
 
   return (
-    <div className="max-w-3xl mx-auto p-6 text-white font-hand">
-      <h2 className="text-2xl font-bold mb-4 capitalize">Channel: {channel}</h2>
+    <div className="max-w-4xl mx-auto p-6 font-hand">
+      <h2 className="text-3xl font-bold mb-6 text-center text-blue-800">
+        Discussion Channel: <span className="capitalize">{channel}</span>
+      </h2>
 
-      <div className="mb-6">
+      {/* Ask Question Section */}
+      <div className="bg-white p-4 rounded-xl shadow mb-8 border border-gray-200">
         <textarea
           placeholder="Ask a question..."
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
-          className="w-full p-3 rounded bg-black border border-white mb-2"
+          className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-3 text-gray-800"
         />
         <button
           onClick={handleAsk}
           disabled={loading}
-          className="bg-amber-700 py-2 px-4 rounded"
+          className="bg-orange-600 hover:bg-orange-700 text-white py-2 px-4 rounded-md font-semibold transition"
         >
           {loading ? "Posting..." : "Post Question"}
         </button>
       </div>
 
-      {posts.map((post) => (
-        <div key={post.id} className="bg-black border border-white p-4 rounded mb-6">
-          <p className="text-lg mb-2 font-semibold">{post.author}: {post.question}</p>
-          <div className="space-y-2 ml-4">
+      {/* Posts */}
+      {posts.map((post, index) => (
+        <div
+          key={post.id}
+          className={`p-5 rounded-2xl mb-6 text-white shadow-lg transition-all border border-gray-100 ${
+            cardColor(index)
+          }`}
+        >
+          <p className="text-lg font-semibold mb-2">
+            {post.author}: <span className="font-normal">{post.question}</span>
+          </p>
+
+          <div className="ml-4 space-y-2">
             {post.replies.map((r) => (
-              <p key={r.id} className="text-sm">{r.author}: {r.text}</p>
+              <div
+                key={r.id}
+                className="bg-white/20 backdrop-blur-md rounded px-3 py-2 text-sm"
+              >
+                <strong>{r.author}:</strong> {r.text}
+              </div>
             ))}
           </div>
+
           <ReplyInput onSubmit={(text) => handleReply(post.id, text)} />
         </div>
       ))}
@@ -86,22 +103,40 @@ export default function ChannelDiscussion() {
   );
 }
 
+// Gradient/tinted color for each post
+function cardColor(index: number) {
+  const colors = [
+    "bg-red-500",
+    "bg-orange-500",
+    "bg-yellow-400 text-black",
+    "bg-green-500",
+    "bg-blue-500",
+    "bg-indigo-500",
+    "bg-violet-500",
+    "bg-pink-500",
+    "bg-teal-500",
+    "bg-rose-500",
+  ];
+  return colors[index % colors.length];
+}
+
+// Reply input component
 function ReplyInput({ onSubmit }: { onSubmit: (text: string) => void }) {
   const [text, setText] = useState("");
   return (
-    <div className="mt-3 flex gap-2">
+    <div className="mt-4 flex gap-2">
       <input
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Your reply..."
-        className="flex-1 p-2 rounded bg-gray-800 border border-white"
+        className="flex-1 p-2 rounded-lg border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
       <button
         onClick={() => {
           onSubmit(text);
           setText("");
         }}
-        className="bg-blue-700 px-3 py-1 rounded"
+        className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium"
       >
         Reply
       </button>

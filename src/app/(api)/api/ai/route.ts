@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     const systemPrompt = getSystemPrompt(task, prompt);
 
     const chatResponse = await openai.chat.completions.create({
-      model: "deepseek/deepseek-v3-base:free", // Use OpenRouter GPT-4o
+      model: "openai/gpt-4o-mini", // Use OpenRouter GPT-4o
       messages: [
         { role: "system", content: systemPrompt.system },
         { role: "user", content: systemPrompt.user },
