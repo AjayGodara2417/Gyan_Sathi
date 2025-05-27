@@ -1,6 +1,6 @@
 // app/api/discussion/[channel]/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import mysql from "mysql2/promise";
+import mysql, { RowDataPacket, ResultSetHeader } from "mysql2/promise";
 
 const pool = mysql.createPool({
   host: process.env.MYSQL_HOST,
@@ -15,7 +15,7 @@ export async function GET(req: NextRequest, context: { params: { channel: string
   const conn = await pool.getConnection();
 
   try {
-    const [[channelRow]] = await conn.query("SELECT id FROM channels WHERE name = ?", [channel]);
+    const [[channelRow]] = await conn.query<RowDataPacket[]>("SELECT id FROM channels WHERE name = ?", [channel]);
     if (!channelRow) return NextResponse.json({ posts: [] });
 
     const [posts] = await conn.query(
@@ -41,11 +41,11 @@ export async function POST(req: NextRequest, context: { params: { channel: strin
   const body = await req.json();
 
   try {
-    let [[channelRow]] = await conn.query("SELECT id FROM channels WHERE name = ?", [channel]);
+    let [[channelRow]] = await conn.query<RowDataPacket[]>("SELECT id FROM channels WHERE name = ?", [channel]);
 
     if (!channelRow) {
-      const [result] = await conn.query("INSERT INTO channels (name) VALUES (?)", [channel]);
-      channelRow = { id: result.insertId }; // ✅ FIXED: initialize channelRow if not found
+      const [result] = await conn.query<ResultSetHeader>("INSERT INTO channels (name) VALUES (?)", [channel]);
+      channelRow = { id: result.insertId } as RowDataPacket;
     }
 
     if (body.postId) {
