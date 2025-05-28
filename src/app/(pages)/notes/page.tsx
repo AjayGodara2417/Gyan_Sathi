@@ -52,12 +52,14 @@ export default function NotesPage() {
       setFormData({ title: "", tag: "", description: "", date: "", fileUrl: "" });
       fetchNotes();
     } catch (err) {
-      console.error(err);
+      console.error("Upload failed:", err);
       alert("Upload failed.");
     } finally {
       setUploading(false);
     }
+    
   };
+  
 
   useEffect(() => {
     fetchNotes();
@@ -102,6 +104,7 @@ export default function NotesPage() {
           <input
             type="date"
             name="date"
+            required
             value={formData.date}
             onChange={handleChange}
             className="w-full p-3 rounded-lg border border-gray-700 focus:border-orange-500 focus:outline-none"
