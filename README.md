@@ -36,10 +36,13 @@ cd gyan_sathi
 
 #### Now install all dependencies
 ```bash
-npm i : to install all dependencies
+npm i
 ```
 
-#### Set up a cloundinary account and get the following things:
+#### Set up a cloudinary account and get the following things:
+
+Open [cloudinary](https://cloudinary.com/) and create an account
+
 ```bash
 Cloud Name
 API Key
@@ -103,12 +106,17 @@ CREATE TABLE replies (
 ```
 
 #### Open Route
+
+Go to [OpenRouter.ai](https://openrouter.ai/) and create an acoount and get the API Key
+
 ```bash
-create an account on Open Router and create an API key
+Ceate an API key
 ```
 
 #### Email.js
-create an email.js account to send and receive the contact us form details via email
+
+create an [Email.js](https://www.emailjs.com/) account to send and receive the contact us form details via email
+
 ```bash
 Create an Emailjs Template and get the EMAILJS_TEMPLATE_ID
 Get the EMAILJS_SERVICE_ID
@@ -120,6 +128,14 @@ Get the EMAILJS_PUBLIC_KEY
 Create a .env.local file
 Set up all the environment variables in the .env.local file
 ```
+
+#### There you go
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to be a part of ###Gyan Sathi
+
 
 <!-- This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
