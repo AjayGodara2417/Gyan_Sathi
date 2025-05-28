@@ -104,15 +104,14 @@ export default function NotesPage() {
             name="date"
             value={formData.date}
             onChange={handleChange}
-            required
-            className="w-full p-3 rounded-lg bg-black border border-gray-700 focus:border-orange-500 focus:outline-none"
+            className="w-full p-3 rounded-lg border border-gray-700 focus:border-orange-500 focus:outline-none"
           />
 
           <div className="flex items-center gap-4">
             <CldUploadButton
               uploadPreset="gyansathinext"
               onSuccess={handleUploadSuccess}
-              className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg transition-all"
+              className="bg-blue-500 hover:bg-blue-600 hover:px-5 hover:py-3 text-white px-4 py-2 rounded-lg transition-all"
             />
             {formData.fileUrl && <span className="text-green-400 text-sm">File ready</span>}
           </div>
@@ -120,7 +119,7 @@ export default function NotesPage() {
           <button
             type="submit"
             disabled={uploading || !formData.fileUrl}
-            className="w-full py-3 rounded-lg bg-orange-600 hover:bg-orange-500 font-semibold transition disabled:opacity-60"
+            className="w-full py-3 rounded-lg bg-orange-500 hover:bg-orange-600 font-semibold transition disabled:opacity-60"
           >
             {uploading ? "Submitting..." : "Submit"}
           </button>
