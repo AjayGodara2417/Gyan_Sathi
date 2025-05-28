@@ -1,6 +1,7 @@
 // app/api/discussion/[channel]/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import mysql, { RowDataPacket, ResultSetHeader } from "mysql2/promise";
+import { getAuth } from "@clerk/nextjs/server";
 
 const pool = mysql.createPool({
   host: process.env.MYSQL_HOST,
@@ -10,6 +11,12 @@ const pool = mysql.createPool({
 });
 
 export async function GET(req: NextRequest, context: { params: { channel: string } }) {
+  // Ensure the user is authenticated
+  const { userId } = getAuth(req);
+  if(!userId){
+    return NextResponse.json({message: "Please SignIn to use this feature"}, {status: 401});
+  }
+  
   const { channel } = context.params;
 
   const conn = await pool.getConnection();
@@ -35,6 +42,12 @@ export async function GET(req: NextRequest, context: { params: { channel: string
 }
 
 export async function POST(req: NextRequest, context: { params: { channel: string } }) {
+  // Ensure the user is authenticated
+  const { userId } = getAuth(req);
+  if(!userId){
+    return NextResponse.json({message: "Please SignIn to use this feature"}, {status: 401});
+  }
+
   const { channel } = context.params;
 
   const conn = await pool.getConnection();
