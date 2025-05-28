@@ -1,4 +1,12 @@
 'use client';
+import {
+  SignInButton,
+  SignOutButton,
+  SignUpButton,
+  // UserButton,
+  SignedIn,
+  SignedOut,
+} from "@clerk/nextjs";
 import Link from 'next/link';
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react'; // Optional: for icons, or use emoji fallback
@@ -25,6 +33,29 @@ const Navbar = () => {
               {item}
             </Link>
           ))}
+
+          {/* Sign up */}
+          <SignedOut>
+
+              <SignUpButton mode="modal">
+                <button className="px-2 py-1 text-sm border border-neutral-300 hover:bg-orange-500 transition-colors rounded-md">
+                  Sign Up
+                </button>
+              </SignUpButton>
+
+              <SignInButton mode="modal">
+                <button className="px-3 py-1 rounded-md text-sm border border-neutral-300 bg-orange-500 hover:bg-black transition-colors">
+                  Sign In
+                </button>
+              </SignInButton>
+            </SignedOut>
+
+            <SignedIn>
+              {/* <Link href="/user-profile" className="text-2xl">👦🏻</Link> */}
+              <SignOutButton>
+                <button className="px-3 py-1 text-sm border border-neutral-300 bg-orange-500 rounded-md">Sign Out</button>
+              </SignOutButton>
+            </SignedIn>
         </nav>
 
         {/* Mobile Toggle */}

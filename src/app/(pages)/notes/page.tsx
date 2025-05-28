@@ -182,7 +182,7 @@ export default function NotesPage() {
 
                 <a
                   href={note.file_url}
-                  target="_blank"
+                  
                   rel="noopener noreferrer"
                   className="flex items-center gap-1 bg-blue-700 hover:bg-blue-600 px-4 py-2 rounded-lg text-white text-sm transition"
                 >
