@@ -28,6 +28,99 @@ indulge in educatinal discussions
 and a lot of other things to boot their academic journey
 ```
 
+## Step by step Process to setup this project on your machine:
+``` bash
+git clone 
+cd gyan_sathi
+```
+
+#### Now install all dependencies
+```bash
+npm i : to install all dependencies
+```
+
+#### Set up a cloundinary account and get the following things:
+```bash
+Cloud Name
+API Key
+API secret
+Preset Name
+```
+
+#### Set up MySql database
+```bash
+MYSQL_HOST=yourHost
+MYSQL_USER=yourUsername
+MYSQL_PASSWORD=yourPassword
+MYSQL_DATABASE=databaseName (gyansathi)
+```
+
+Run the following queries on the mysql
+```bash
+create database gyansathi;
+use gyansathi;
+```
+
+```bash
+CREATE TABLE notes (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255),
+  tag VARCHAR(100),
+  description TEXT,
+  date DATE,
+  file_url TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+```bash
+CREATE TABLE channels (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(50) UNIQUE
+);
+```
+
+```bash
+CREATE TABLE posts (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  channel_id INT,
+  author VARCHAR(100),
+  question TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (channel_id) REFERENCES channels(id)
+);
+```
+
+```bash
+CREATE TABLE replies (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  post_id INT,
+  author VARCHAR(100),
+  text TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (post_id) REFERENCES posts(id)
+);
+```
+
+#### Open Route
+```bash
+create an account on Open Router and create an API key
+```
+
+#### Email.js
+create an email.js account to send and receive the contact us form details via email
+```bash
+Create an Emailjs Template and get the EMAILJS_TEMPLATE_ID
+Get the EMAILJS_SERVICE_ID
+Get the EMAILJS_PUBLIC_KEY
+```
+
+#### Set up Environment variables (take refrence from .env.example file)
+```bash
+Create a .env.local file
+Set up all the environment variables in the .env.local file
+```
+
 <!-- This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
