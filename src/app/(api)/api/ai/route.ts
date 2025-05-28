@@ -1,4 +1,5 @@
 // app/api/ai/route.ts
+import { getAuth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 
@@ -8,6 +9,12 @@ const openai = new OpenAI({
 });
 
 export async function POST(req: NextRequest) {
+  // Ensure the user is authenticated
+  const { userId } = getAuth(req);
+  if(!userId){
+    return NextResponse.json({message: "Please SignIn to use this feature"}, {status: 401});
+  }
+
   try {
     const { task, prompt } = await req.json();
     if (!task || !prompt) {
