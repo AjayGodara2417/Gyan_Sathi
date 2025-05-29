@@ -64,7 +64,7 @@ export default function NotesPage() {
 
   useEffect(() => {
     fetchNotes();
-  }, [fetchNotes]);
+  }, []);
 
   const handleDownload = async (url: string, title: string) => {
     try{
