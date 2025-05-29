@@ -23,7 +23,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Links */}
-        <nav className="hidden md:flex gap-6 text-sm font-medium">
+        <nav className="hidden md:flex gap-6 text-sm font-medium items-center">
           {['Home', 'AI', 'Notes', 'Discussion', 'About', 'Contact Us'].map((item, i) => (
             <Link
               key={i}
@@ -38,13 +38,13 @@ const Navbar = () => {
           <SignedOut>
 
               <SignUpButton mode="modal">
-                <button className="px-2 py-1 text-sm border border-neutral-300 hover:bg-orange-500 transition-colors rounded-md">
+                <button className="text-white border-1 border-gray-50  hover:bg-orange-400 hover:text-black px-6 py-3 rounded-md font-semibold transition-transform duration-300 hover:scale-105 shadow">
                   Sign Up
                 </button>
               </SignUpButton>
 
               <SignInButton mode="modal">
-                <button className="px-3 py-1 rounded-md text-sm border border-neutral-300 bg-orange-500 hover:bg-black transition-colors">
+                <button className="bg-orange-400 text-black px-6 py-3 rounded-md font-semibold transition-transform duration-300 hover:text-white hover:scale-105 shadow">
                   Sign In
                 </button>
               </SignInButton>
@@ -53,7 +53,7 @@ const Navbar = () => {
             <SignedIn>
               {/* <Link href="/user-profile" className="text-2xl">👦🏻</Link> */}
               <SignOutButton>
-                <button className="px-3 py-1 text-sm border border-neutral-300 bg-orange-500 rounded-md">Sign Out</button>
+                <button className="bg-orange-400 text-black hover:text-white px-6 py-3 rounded-md font-semibold transition-transform duration-300 hover:scale-105 shadow">Sign Out</button>
               </SignOutButton>
             </SignedIn>
         </nav>
