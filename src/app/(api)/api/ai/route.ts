@@ -45,9 +45,9 @@ export async function POST(req: NextRequest) {
     );
 
     return NextResponse.json({ result: aiResult });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("AI processing error:", err);
-    return NextResponse.json({ message: err.message }, { status: 500 });
+    // return NextResponse.json({ message: err.message }, { status: 500 });
   }
 }
 

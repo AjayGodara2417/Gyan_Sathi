@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { CldUploadButton } from "next-cloudinary";
 import { FileText, Download } from "lucide-react";
+import Image from "next/image";
 
 interface Note {
   id: number;
@@ -63,7 +64,7 @@ export default function NotesPage() {
 
   useEffect(() => {
     fetchNotes();
-  }, []);
+  }, [fetchNotes]);
 
   const handleDownload = async (url: string, title: string) => {
     try{
@@ -186,7 +187,7 @@ export default function NotesPage() {
               >
                 <div className="w-20 h-20 flex items-center justify-center rounded-md overflow-hidden bg-gray-800 border border-green-500">
                   {isImage ? (
-                    <img src={note.file_url} alt="note preview" className="w-full h-full object-cover" />
+                    <Image width={300} height={100} src={note.file_url} alt="note preview" className="w-full h-full object-cover" />
                   ) : isPDF ? (
                     <FileText className="text-green-400 w-8 h-8" />
                   ) : (

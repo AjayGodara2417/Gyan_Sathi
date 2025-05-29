@@ -3,6 +3,7 @@
 import { CldUploadButton } from "next-cloudinary";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Image from "next/image";
 
 interface Product {
   id: number;
@@ -116,7 +117,9 @@ export default function ProductsPage() {
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
           />
           {formData.imageUrl && (
-            <img
+            <Image
+            width={300}
+            height={300}
               src={formData.imageUrl}
               alt="Preview"
               className="mt-3 w-full max-h-48 object-contain border rounded"
@@ -137,7 +140,9 @@ export default function ProductsPage() {
         {products.map((product) => (
           <div key={product.id} className="bg-white p-4 rounded-lg shadow-md">
             {product.image_url && (
-              <img
+              <Image
+                width={300}
+                height={200}
                 src={product.image_url}
                 alt={product.title}
                 className="h-40 w-full object-cover rounded"

@@ -52,8 +52,9 @@ export default function AIAssistantPage() {
         },
         ...prev,
       ]);
-    } catch (error: any) {
-      setResult("Error: " + (error.response?.data?.message || error.message));
+    } catch (error: unknown) {
+      console.error("AI processing error:", error);
+      // setResult("Error: " + (error.response?.data?.message || error.message));
     } finally {
       setLoading(false);
     }
