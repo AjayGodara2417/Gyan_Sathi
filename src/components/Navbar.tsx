@@ -23,8 +23,8 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Links */}
-        <nav className="hidden md:flex gap-6 text-sm font-medium items-center">
-          {['Home', 'AI', 'Notes', 'Discussion', 'About', 'Contact Us', 'Products'].map((item, i) => (
+        <nav className="hidden md:flex gap-6 text-md font-medium items-center">
+          {['Home', 'AI', 'Notes', 'Discussion', 'Products', 'About', 'Contact Us'].map((item, i) => (
             <Link
               key={i}
               href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(/\s+/g, '')}`}
@@ -38,13 +38,13 @@ const Navbar = () => {
           <SignedOut>
 
               <SignUpButton mode="modal">
-                <button className="text-white border-1 border-gray-50  hover:bg-orange-400 hover:text-black px-6 py-3 rounded-md font-semibold transition-transform duration-300 hover:scale-105 shadow">
+                <button className="text-white border border-orange-400  hover:bg-orange-400 hover:text-black px-6 py-3 rounded-md font-semibold transition-transform duration-300 hover:scale-105 shadow">
                   Sign Up
                 </button>
               </SignUpButton>
 
               <SignInButton mode="modal">
-                <button className="bg-orange-400 text-black px-6 py-3 rounded-md font-semibold transition-transform duration-300 hover:text-white hover:scale-105 shadow">
+                <button className="bg-orange-400 border border-orange-400 text-black px-6 py-3 rounded-md font-semibold transition-transform duration-300 hover:text-white hover:scale-105 shadow">
                   Sign In
                 </button>
               </SignInButton>

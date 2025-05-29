@@ -17,13 +17,13 @@ export default function JoinBanner() {
       <div className="space-x-4 flex justify-center">
         {!isSignedIn ? (
           <>
-            <SignUpButton>
-              <button className="bg-orange-400 text-black px-6 py-3 rounded-full font-semibold transition-transform duration-300 hover:scale-105">
+            <SignUpButton mode="modal">
+              <button className="bg-orange-400 text-black px-6 py-3 rounded-md font-semibold transition-transform duration-300 hover:scale-105">
                 Sign Up
               </button>
             </SignUpButton>
             <SignInButton mode="modal">
-              <button className="bg-gray-800 text-white px-6 py-3 rounded-full font-semibold transition-transform duration-300 hover:scale-105">
+              <button className="bg-gray-800 text-white px-6 py-3 rounded-md font-semibold transition-transform duration-300 hover:scale-105">
                 Log In
               </button>
             </SignInButton>
