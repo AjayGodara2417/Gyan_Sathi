@@ -24,7 +24,7 @@ const Navbar = () => {
 
         {/* Desktop Links */}
         <nav className="hidden md:flex gap-6 text-sm font-medium items-center">
-          {['Home', 'AI', 'Notes', 'Discussion', 'About', 'Contact Us'].map((item, i) => (
+          {['Home', 'AI', 'Notes', 'Discussion', 'About', 'Contact Us', 'Products'].map((item, i) => (
             <Link
               key={i}
               href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(/\s+/g, '')}`}
