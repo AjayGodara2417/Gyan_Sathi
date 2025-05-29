@@ -12,16 +12,16 @@ export default function Footer() {
      <div>
        <h4 className="text-white font-semibold mb-2">Student Resources</h4>
        <ul className="space-y-1 text-sm">
-         <li><Link href="#" className="hover:text-orange-400 transition-colors">Upload Notes</Link></li>
-         <li><Link href="#" className="hover:text-orange-400 transition-colors">Download Notes</Link></li>
-         <li><Link href="#" className="hover:text-orange-400 transition-colors">Ask Questions</Link></li>
+         <li><Link href="/notes" className="hover:text-orange-400 transition-colors">Upload Notes</Link></li>
+         <li><Link href="/notes" className="hover:text-orange-400 transition-colors">Download Notes</Link></li>
+         <li><Link href="/ai" className="hover:text-orange-400 transition-colors">Ask Questions</Link></li>
        </ul>
      </div>
      <div>
        <h4 className="text-white font-semibold mb-2">Community</h4>
        <ul className="space-y-1 text-sm">
-         <li><Link href="#" className="hover:text-orange-400 transition-colors">Discussion Forum</Link></li>
-         <li><Link href="#" className="hover:text-orange-400 transition-colors">Study Groups</Link></li>
+         <li><Link href="/discussion" className="hover:text-orange-400 transition-colors">Discussion Forum</Link></li>
+         <li><Link href="/discussion" className="hover:text-orange-400 transition-colors">Study Groups</Link></li>
          <li><Link href="#" className="hover:text-orange-400 transition-colors">Blog Posts</Link></li>
        </ul>
      </div>
@@ -30,7 +30,7 @@ export default function Footer() {
        <ul className="space-y-1 text-sm">
          <li><Link href="#" className="hover:text-orange-400 transition-colors">Help Center</Link></li>
          <li><Link href="#" className="hover:text-orange-400 transition-colors">User Feedback</Link></li>
-         <li><Link href="#" className="hover:text-orange-400 transition-colors">Contact Us</Link></li>
+         <li><Link href="/contactus" className="hover:text-orange-400 transition-colors">Contact Us</Link></li>
        </ul>
      </div>
    </div>
