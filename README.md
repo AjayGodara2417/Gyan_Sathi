@@ -124,6 +124,16 @@ CREATE TABLE products (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
+```bash
+CREATE TABLE ai_chats (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id VARCHAR(255),
+  task VARCHAR(50),
+  prompt TEXT,
+  response TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
 
 #### Open Route
 
