@@ -38,6 +38,14 @@ cd gyan_sathi
 ```bash
 npm i
 ```
+#### Clerk Authentication
+
+Open [Clerk.com](https://clerk.com/) and create an account and get the following credentials:
+
+```bash
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+CLERK_SECRET_KEY
+```
 
 #### Set up a cloudinary account and get the following things:
 
@@ -110,7 +118,7 @@ CREATE TABLE replies (
 Go to [OpenRouter.ai](https://openrouter.ai/) and create an acoount and get the API Key
 
 ```bash
-Ceate an API key
+Create an API key
 ```
 
 #### Email.js
