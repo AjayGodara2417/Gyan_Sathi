@@ -8,10 +8,10 @@ export default function Join() {
      <h2 className="text-3xl font-bold mb-4">Join our student platform today!</h2>
      <p className="mb-6 text-lg">Connect with other students, share notes, and excel in your studies.</p>
      <Link
-       href="#"
+       href="/discussion"
        className="bg-orange-400 text-black px-6 py-3 rounded-md font-semibold transition-transform duration-300 hover:scale-105 shadow"
      >
-       Sign Up Now
+       Indulge into knwolegable discussions
      </Link>
    </div>
  </section>

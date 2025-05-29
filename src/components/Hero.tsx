@@ -13,17 +13,17 @@ const Hero = () => {
      </p>
      <div className="space-x-4">
        <Link
-         href="#"
-         className="bg-orange-400 text-black px-6 py-3 rounded-full font-semibold transition-transform duration-300 hover:scale-105 shadow-md hover:shadow-lg"
+         href="/notes"
+         className="bg-orange-400 text-black px-6 py-3 rounded-md font-semibold transition-transform duration-300 hover:text-white hover:scale-105 shadow"
        >
-         Join
+         Start Uploading
        </Link>
-       <Link
+       {/* <Link
          href="#"
          className="border border-gray-500 text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 hover:text-orange-400 hover:border-orange-400"
        >
          Learn More
-       </Link>
+       </Link> */}
      </div>
    </div>
    <div className="md:w-1/2 flex justify-center md:justify-end">
