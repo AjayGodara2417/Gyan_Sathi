@@ -43,8 +43,14 @@ export default function AIAssistantPage() {
       const res = await axios.post("/api/ai", { task, prompt });
       setResult(res.data.result);
       setHistory((prev) => [
-        { id: Date.now(), task, prompt, response: res.data.result, created_at: new Date().toISOString() },
-        ...prev
+        {
+          id: Date.now(),
+          task,
+          prompt,
+          response: res.data.result,
+          created_at: new Date().toISOString(),
+        },
+        ...prev,
       ]);
     } catch (error: any) {
       setResult("Error: " + (error.response?.data?.message || error.message));
@@ -65,37 +71,39 @@ export default function AIAssistantPage() {
   };
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white">
+    <div className="flex min-h-screen bg-[#0a0a0a] text-white">
       {/* Sidebar */}
-      <div className="w-72 bg-[#111] border-r border-gray-800 p-4 overflow-y-auto">
-        <h2 className="text-lg font-bold mb-4">Past Conversations</h2>
-        {history.map((chat) => (
-          <button
-            key={chat.id}
-            onClick={() => setSelectedChat(chat)}
-            className="w-full text-left px-3 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 mb-2"
-          >
-            <div className="font-semibold text-sm truncate">{chat.task.toUpperCase()}</div>
-            <div className="text-xs text-gray-400 truncate">{chat.prompt}</div>
-            <div className="text-xs text-gray-500 mt-1">{new Date(chat.created_at).toLocaleString()}</div>
-          </button>
-        ))}
-      </div>
+      <aside className="w-80 bg-[#121212] border-r border-gray-800 p-6 space-y-6">
+        
+        <div className="space-y-3 overflow-y-auto max-h-[80vh] pr-1">
+          {history.map((chat) => (
+            <button
+              key={chat.id}
+              onClick={() => setSelectedChat(chat)}
+              className="w-full text-left px-4 py-3 rounded-lg bg-gray-800 hover:bg-gray-700 transition"
+            >
+              <div className="font-semibold text-sm truncate text-white">
+                {chat.task.toUpperCase()}
+              </div>
+              <div className="text-xs text-gray-400 truncate">{chat.prompt}</div>
+              <div className="text-[11px] text-gray-500 mt-1">
+                {new Date(chat.created_at).toLocaleString()}
+              </div>
+            </button>
+          ))}
+        </div>
+      </aside>
 
-      {/* Main Content */}
-      <div className="flex-1 flex justify-center px-4 py-10">
-        <div className="w-full max-w-2xl bg-[#121212] border border-gray-800 p-8 rounded-2xl shadow-2xl">
-          <h1 className="text-4xl font-bold text-center mb-8 tracking-tight text-orange-500">
-            AI Assistant
-          </h1>
-
+      {/* Main Panel */}
+      <main className="flex-1 px-8 py-10">
+        <div className="max-w-3xl mx-auto">
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label className="block font-semibold mb-1">Select Task</label>
+            <div className="space-y-2">
+              <label className="block font-semibold text-lg">Select Task</label>
               <select
                 value={task}
                 onChange={(e) => setTask(e.target.value)}
-                className="w-full px-4 py-3 rounded-lg bg-black border border-gray-700 focus:border-orange-500 focus:outline-none"
+                className="w-full p-3 rounded-md bg-black border border-gray-700 focus:border-orange-500 outline-none"
               >
                 <option value="quiz">Quiz Generator</option>
                 <option value="doubt">Doubt Solver</option>
@@ -103,15 +111,15 @@ export default function AIAssistantPage() {
               </select>
             </div>
 
-            <div>
-              <label className="block font-semibold mb-1">Your Prompt</label>
+            <div className="space-y-2">
+              <label className="block font-semibold text-lg">Your Prompt</label>
               <textarea
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
                 required
                 placeholder="Ask a question or enter a topic..."
-                rows={5}
-                className="w-full px-4 py-3 rounded-lg bg-black border border-gray-700 placeholder-gray-400 focus:border-orange-500 focus:outline-none resize-none"
+                rows={6}
+                className="w-full p-4 rounded-md bg-black border border-gray-700 placeholder-gray-400 focus:border-orange-500 outline-none resize-none"
               />
             </div>
 
@@ -119,7 +127,7 @@ export default function AIAssistantPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 rounded-lg font-semibold bg-orange-600 hover:bg-orange-500 active:bg-orange-700 disabled:opacity-60"
+                className="w-full py-3 rounded-lg font-semibold bg-orange-600 hover:bg-orange-500 transition disabled:opacity-60"
               >
                 {loading ? "Processing..." : "Run AI"}
               </button>
@@ -133,40 +141,38 @@ export default function AIAssistantPage() {
             </div>
           </form>
 
-          {result && (
-            <div className="mt-8 bg-gray-900 border border-gray-700 rounded-xl p-5 relative max-h-[320px] overflow-auto">
-              <div className="flex items-center justify-between mb-3">
-                <h2 className="text-lg font-bold text-orange-400">Result</h2>
-                <button
-                  onClick={handleCopy}
-                  className="text-sm flex items-center gap-1 text-orange-300 hover:text-orange-500"
-                >
-                  <Copy size={16} /> Copy
-                </button>
+          {/* AI Output */}
+          {(result || selectedChat) && (
+            <div className="mt-10 bg-[#1a1a1a] border border-gray-700 rounded-xl p-6 shadow-md">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-xl font-bold text-orange-400">
+                  {selectedChat ? selectedChat.task : task}
+                </h2>
+                {result && (
+                  <button
+                    onClick={handleCopy}
+                    className="text-sm flex items-center gap-1 text-orange-300 hover:text-orange-500"
+                  >
+                    <Copy size={16} /> Copy
+                  </button>
+                )}
               </div>
-              <pre className="whitespace-pre-wrap text-sm font-mono text-gray-100">
-                {result}
-              </pre>
-            </div>
-          )}
-
-          {/* Show selected history result if user clicks a past chat */}
-          {selectedChat && !result && (
-            <div className="mt-8 bg-gray-900 border border-gray-700 rounded-xl p-5">
-              <div className="mb-4">
-                <h2 className="text-lg font-bold text-orange-400">Prompt</h2>
-                <p className="text-gray-300">{selectedChat.prompt}</p>
+              <div className="mb-3">
+                <p className="text-gray-400 mb-1 font-medium">Prompt</p>
+                <pre className="text-sm bg-black/30 p-4 rounded-lg whitespace-pre-wrap">
+                  {selectedChat ? selectedChat.prompt : prompt}
+                </pre>
               </div>
               <div>
-                <h2 className="text-lg font-bold text-orange-400">AI Response</h2>
-                <pre className="whitespace-pre-wrap text-sm font-mono text-gray-100">
-                  {selectedChat.response}
+                <p className="text-gray-400 mb-1 font-medium">AI Response</p>
+                <pre className="text-sm bg-black/30 p-4 rounded-lg whitespace-pre-wrap">
+                  {selectedChat ? selectedChat.response : result}
                 </pre>
               </div>
             </div>
           )}
         </div>
-      </div>
+      </main>
     </div>
   );
 }
