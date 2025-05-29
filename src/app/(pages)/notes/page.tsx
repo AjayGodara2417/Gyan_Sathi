@@ -65,6 +65,26 @@ export default function NotesPage() {
     fetchNotes();
   }, []);
 
+  const handleDownload = async (url: string, title: string) => {
+    try{
+      const response = await fetch(url);
+      const blob = await response.blob();
+      const blobUrl = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = blobUrl;
+      a.download = title || "file";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      window.URL.revokeObjectURL(blobUrl);
+    } catch (err) {
+      console.error("download failed:", err);
+      alert("failed to download file");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white px-6 py-10">
       {/* Upload Form */}
@@ -184,8 +204,8 @@ export default function NotesPage() {
                 </div>
 
                 <a
-                  href={note.file_url}
-                  
+                  // href={note.file_url}
+                  onClick={() => handleDownload(note.file_url, note.title)}
                   rel="noopener noreferrer"
                   className="flex items-center gap-1 bg-blue-700 hover:bg-blue-600 px-4 py-2 rounded-lg text-white text-sm transition"
                 >
