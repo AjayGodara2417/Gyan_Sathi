@@ -1,7 +1,7 @@
-// app/api/ai/route.ts
 import { getAuth } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
+import { db } from "@/lib/db"; // Make sure your db connection is exported here
 
 const openai = new OpenAI({
   apiKey: process.env.OPENROUTER_API_KEY!,
@@ -9,10 +9,10 @@ const openai = new OpenAI({
 });
 
 export async function POST(req: NextRequest) {
-  // Ensure the user is authenticated
   const { userId } = getAuth(req);
-  if(!userId){
-    return NextResponse.json({message: "Please SignIn to use this feature"}, {status: 401});
+
+  if (!userId) {
+    return NextResponse.json({ message: "Please SignIn to use this feature" }, { status: 401 });
   }
 
   try {
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
     const systemPrompt = getSystemPrompt(task, prompt);
 
     const chatResponse = await openai.chat.completions.create({
-      model: "openai/gpt-4o-mini", // Use OpenRouter GPT-4o
+      model: "openai/gpt-4o-mini",
       messages: [
         { role: "system", content: systemPrompt.system },
         { role: "user", content: systemPrompt.user },
@@ -36,8 +36,17 @@ export async function POST(req: NextRequest) {
       max_tokens: 1000,
     });
 
-    return NextResponse.json({ result: chatResponse.choices[0].message.content });
+    const aiResult = chatResponse.choices[0].message.content;
+
+    // Save chat history to DB
+    await db.execute(
+      `INSERT INTO ai_chats (user_id, task, prompt, response) VALUES (?, ?, ?, ?)`,
+      [userId, task, prompt, aiResult]
+    );
+
+    return NextResponse.json({ result: aiResult });
   } catch (err: any) {
+    console.error("AI processing error:", err);
     return NextResponse.json({ message: err.message }, { status: 500 });
   }
 }
