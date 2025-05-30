@@ -6,6 +6,24 @@
   font-family: 'Patrick Hand', cursive;
 }
 
+/* Custom Scrollbar Styles */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
+
 const styles {
   .custom-scrollbar::-webkit-scrollbar {
     width: 6px;
@@ -122,21 +140,3 @@ input:focus, textarea:focus {
     padding: 0.5rem;
   }
 } */
-
-/* Custom Scrollbar Styles */
-.custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: #1a1a1a;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 3px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #444;
-}

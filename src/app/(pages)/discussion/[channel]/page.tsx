@@ -17,10 +17,11 @@ export default function ChannelDiscussion() {
   const [question, setQuestion] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const fetchPosts = async () => {
+  async function fetchPosts(channel: string) {
     const res = await axios.get(`/api/discussion/${channel}`);
     setPosts(res.data.posts);
-  };
+  }
+  
 
   const handleAsk = async () => {
     if (!question.trim()) return;
@@ -29,9 +30,11 @@ export default function ChannelDiscussion() {
       author: "Student",
       question,
     });
+    setQuestion("");
+    fetchPosts(channel as string);
 
     setQuestion("");
-    fetchPosts();
+    // fetchPosts();
     setLoading(false);
   };
 
@@ -42,13 +45,16 @@ export default function ChannelDiscussion() {
       text,
       author: "User",
     });
-
-    fetchPosts();
+    fetchPosts(channel as string);
+    // fetchPosts();
   };
 
   useEffect(() => {
-    fetchPosts();
+    if (channel) {
+      fetchPosts(channel as string);
+    }
   }, [channel]);
+  
 
   return (
     <div className="max-w-4xl mx-auto p-6 font-hand">

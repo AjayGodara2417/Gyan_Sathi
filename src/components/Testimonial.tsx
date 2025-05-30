@@ -15,7 +15,7 @@ export default function Testimonial() {
               className="bg-gray-100 p-6 rounded-xl transition-all duration-300 hover:shadow-xl hover:scale-[1.02]"
             >
               <p className="text-xl font-semibold mb-2 text-yellow-500">★★★★★</p>
-              <p className="mb-4 italic">"{t.quote}"</p>
+              <p className="mb-4 italic">&ldquo;{t.quote}&rdquo;</p>
               <div className="font-medium">{t.name}</div>
               <div className="text-gray-500 text-sm">{t.role}</div>
             </div>
