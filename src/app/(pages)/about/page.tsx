@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function AboutPage() {
   return (
-    <div className="bg-black text-white px-6 md:px-20 py-16 font-sans ">
+    <div className="bg-black h-screen text-white px-6 md:px-20 py-16 font-sans ">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
         {/* Left Text Section */}
         <div>

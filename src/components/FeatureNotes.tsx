@@ -48,7 +48,7 @@ export default function FeatureNotes() {
   }, []);
 
   return (
-    <div className="w-full px-4 sm:px-10 py-10 bg-amber-50 min-h-screen">
+    <div className="w-full px-4 sm:px-10 py-10 bg-amber-50">
       <h2 className="text-3xl font-bold mb-8 text-center text-black">Featured Notes</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
