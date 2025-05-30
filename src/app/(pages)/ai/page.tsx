@@ -232,23 +232,3 @@ export default function AIPage() {
     </div>
   );
 }
-
-// Add these styles to your global CSS file
-const styles = `
-.custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: #1a1a1a;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 3px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #444;
-}
-`;
