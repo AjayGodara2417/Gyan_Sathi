@@ -54,7 +54,7 @@ export default function NotesPage() {
       fetchNotes();
     } catch (err) {
       console.error("Upload failed:", err);
-      alert("Upload failed.");
+      alert("Upload failed. Please sign in to continue.");
     } finally {
       setUploading(false);
     }

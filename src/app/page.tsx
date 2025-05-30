@@ -2,6 +2,7 @@
 
 import Banner from "@/components/Banner";
 import Feature from "@/components/Feature";
+import FeatureNotes from "@/components/FeatureNotes";
 import Hero from "@/components/Hero";
 import Join from "@/components/Join";
 import JoinBanner from "@/components/JoinBanner";
@@ -18,6 +19,8 @@ export default function Home() {
 
       {/* CTA Section */}
       <Join />
+
+      <FeatureNotes />
 
       {/* Banner Feature  */}
       <Banner />
