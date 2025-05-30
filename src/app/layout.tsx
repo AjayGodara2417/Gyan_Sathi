@@ -30,13 +30,15 @@ export default function RootLayout({
     <ClerkProvider>
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
         {/* Navbar Section */}
         <Navbar />
 
         {/* Main Content Section */}
-        {children}
+        <main className="flex-grow">
+          {children}
+        </main>
 
         {/* Footer Section */}
         <Footer />
