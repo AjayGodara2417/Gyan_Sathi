@@ -1,4 +1,3 @@
-// app/api/discussion/[channel]/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import mysql, { RowDataPacket, ResultSetHeader } from "mysql2/promise";
 import { getAuth } from "@clerk/nextjs/server";
@@ -10,19 +9,26 @@ const pool = mysql.createPool({
   database: process.env.MYSQL_DATABASE,
 });
 
-export async function GET(req: NextRequest, context: { params: { channel: string } }) {
-  // Ensure the user is authenticated
+export async function GET(
+  req: NextRequest,
+  context: { params: Promise<{ channel: string }> }
+) {
   const { userId } = getAuth(req);
-  if(!userId){
-    return NextResponse.json({message: "Please SignIn to use this feature"}, {status: 401});
+  if (!userId) {
+    return NextResponse.json(
+      { message: "Please SignIn to use this feature" },
+      { status: 401 }
+    );
   }
-  
-  const { channel } = context.params;
 
+  const { channel } = await context.params;
   const conn = await pool.getConnection();
 
   try {
-    const [[channelRow]] = await conn.query<RowDataPacket[]>("SELECT id FROM channels WHERE name = ?", [channel]);
+    const [[channelRow]] = await conn.query<RowDataPacket[]>(
+      "SELECT id FROM channels WHERE name = ?",
+      [channel]
+    );
     if (!channelRow) return NextResponse.json({ posts: [] });
 
     const [posts] = await conn.query(
@@ -41,30 +47,43 @@ export async function GET(req: NextRequest, context: { params: { channel: string
   }
 }
 
-export async function POST(req: NextRequest, context: { params: { channel: string } }) {
-  // Ensure the user is authenticated
+export async function POST(
+  req: NextRequest,
+  context: { params: Promise<{ channel: string }> }
+) {
   const { userId } = getAuth(req);
-  if(!userId){
-    return NextResponse.json({message: "Please SignIn to use this feature"}, {status: 401});
+  if (!userId) {
+    return NextResponse.json(
+      { message: "Please SignIn to use this feature" },
+      { status: 401 }
+    );
   }
 
-  const { channel } = context.params;
-
+  const { channel } = await context.params;
   const conn = await pool.getConnection();
   const body = await req.json();
 
   try {
-    let [[channelRow]] = await conn.query<RowDataPacket[]>("SELECT id FROM channels WHERE name = ?", [channel]);
+    let [[channelRow]] = await conn.query<RowDataPacket[]>(
+      "SELECT id FROM channels WHERE name = ?",
+      [channel]
+    );
 
     if (!channelRow) {
-      const [result] = await conn.query<ResultSetHeader>("INSERT INTO channels (name) VALUES (?)", [channel]);
+      const [result] = await conn.query<ResultSetHeader>(
+        "INSERT INTO channels (name) VALUES (?)",
+        [channel]
+      );
       channelRow = { id: result.insertId } as RowDataPacket;
     }
 
     if (body.postId) {
       const { postId, text, author } = body;
       if (!postId || !text || !author)
-        return NextResponse.json({ message: "Missing reply fields" }, { status: 400 });
+        return NextResponse.json(
+          { message: "Missing reply fields" },
+          { status: 400 }
+        );
 
       await conn.query(
         "INSERT INTO replies (post_id, author, text) VALUES (?, ?, ?)",
@@ -74,7 +93,10 @@ export async function POST(req: NextRequest, context: { params: { channel: strin
     } else {
       const { author, question } = body;
       if (!author || !question)
-        return NextResponse.json({ message: "Missing question fields" }, { status: 400 });
+        return NextResponse.json(
+          { message: "Missing question fields" },
+          { status: 400 }
+        );
 
       await conn.query(
         "INSERT INTO posts (channel_id, author, question) VALUES (?, ?, ?)",
