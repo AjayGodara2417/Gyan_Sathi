@@ -135,6 +135,89 @@ CREATE TABLE ai_chats (
 );
 ```
 
+#### Aiven Database
+Create an [Aiven](https://aiven.io/) account and get the required credentials
+Connect the Aiven database to MySQL Workbench with the SSL certificate
+Get the following from Aiven website:
+```bash
+Host
+Port
+User
+Password
+SSL mode
+```
+After connecting, run the following table queries on the SQL Editor (MySQL Workbench) to create the tables:
+```bash
+-- Notes
+CREATE TABLE notes (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255),
+  tag VARCHAR(100),
+  description TEXT,
+  date DATE,
+  file_url TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Channels
+CREATE TABLE channels (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(50) UNIQUE
+);
+
+-- Posts (linked to channels)
+CREATE TABLE posts (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  channel_id INT,
+  author VARCHAR(100),
+  question TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (channel_id) REFERENCES channels(id)
+);
+
+-- Replies (linked to posts)
+CREATE TABLE replies (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  post_id INT,
+  author VARCHAR(100),
+  text TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (post_id) REFERENCES posts(id)
+);
+
+-- Products
+CREATE TABLE products (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  description TEXT,
+  price DECIMAL(10,2),
+  contact VARCHAR(255),
+  image_url TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- AI Chats
+CREATE TABLE ai_chats (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id VARCHAR(255),
+  task VARCHAR(50),
+  prompt TEXT,
+  response TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+Connect with Aiven properly with the connection string and following Credentials in your .env file:
+```bash
+aiven_HOST
+aiven_PORT
+aiven_USER
+aiven_PASSWORD
+aiven_NAME
+aiven_SSL_CA_PATH
+DATABASE_URL
+```
+
 #### Open Route
 
 Go to [OpenRouter.ai](https://openrouter.ai/) and create an acoount and get the API Key
