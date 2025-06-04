@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
 
 export async function GET() {
   try {
-    const [rows] = await db.query("SELECT * FROM notes ORDER BY created_at DESC");
+    const [rows] = await db.query("SELECT * FROM notes");
     return NextResponse.json({ notes: rows });
   } catch (error) {
     console.error("Fetch error:", error);
