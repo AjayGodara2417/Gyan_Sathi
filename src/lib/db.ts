@@ -23,6 +23,6 @@ export const db = await mysql.createConnection({
   password: aiven_PASSWORD,
   database: aiven_NAME,
   ssl: {
-    ca: fs.readFileSync(path.join(process.cwd(), aiven_SSL_CA_PATH))
+    ca: process.env.AIVEN_SSL_CA
   }
 });
