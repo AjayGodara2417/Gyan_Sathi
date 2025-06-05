@@ -53,8 +53,15 @@ export default function AIPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+  
+    if (!isSignedIn) {
+      alert("Please sign in to use AI features.");
+      return;
+    }
+  
     setLoading(true);
     setResult("");
+  
     try {
       const res = await axios.post("/api/ai", { task, prompt });
       setResult(res.data.result);
@@ -68,13 +75,13 @@ export default function AIPage() {
         },
         ...prev,
       ]);
-    } catch (error: unknown) {
+    } catch (error) {
       console.error("AI processing error:", error);
-      // setResult("Error: " + (error.response?.data?.message || error.message));
     } finally {
       setLoading(false);
     }
   };
+  
 
   const handleCopy = async () => {
     if (!result) return;
