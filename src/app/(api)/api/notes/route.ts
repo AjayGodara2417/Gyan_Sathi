@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
-// import { getAuth } from "@clerk/nextjs/server";
+import { getAuth } from "@clerk/nextjs/server";
 
 export async function POST(req: NextRequest) {
   // Ensure the user is authenticated
-  // const { userId } = getAuth(req);
-  // if(!userId){
-  //   return NextResponse.json({message: "Please SignIn to use this feature"}, {status: 401});
-  // }
+  const { userId } = getAuth(req);
+  if(!userId){
+    return NextResponse.json({message: "Please SignIn to use this feature"}, {status: 401});
+  }
 
   const body = await req.json();
   const { title, tag, description, date, fileUrl } = body;
