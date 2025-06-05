@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import axios from "axios";
+import { useUser } from "@clerk/nextjs"; // ✅ Clerk hook for client-side auth
 
 interface Post {
   id: string;
@@ -13,48 +14,52 @@ interface Post {
 
 export default function ChannelDiscussion() {
   const { channel } = useParams();
+  const { isSignedIn, user } = useUser(); // ✅ user object from Clerk
   const [posts, setPosts] = useState<Post[]>([]);
   const [question, setQuestion] = useState("");
   const [loading, setLoading] = useState(false);
 
   async function fetchPosts(channel: string) {
+    if (!isSignedIn) return; // ⛔ Don't fetch if not signed in
     const res = await axios.get(`/api/discussion/${channel}`);
     setPosts(res.data.posts);
   }
-  
 
   const handleAsk = async () => {
-    if (!question.trim()) return;
+    if (!isSignedIn || !question.trim()) return;
     setLoading(true);
     await axios.post(`/api/discussion/${channel}`, {
-      author: "Student",
+      author: user?.firstName || "User",
       question,
     });
     setQuestion("");
-    fetchPosts(channel as string);
-
-    setQuestion("");
-    // fetchPosts();
+    await fetchPosts(channel as string);
     setLoading(false);
   };
 
   const handleReply = async (postId: string, text: string) => {
-    if (!text.trim()) return;
+    if (!isSignedIn || !text.trim()) return;
     await axios.post(`/api/discussion/${channel}`, {
       postId,
       text,
-      author: "User",
+      author: user?.firstName || "User",
     });
-    fetchPosts(channel as string);
-    // fetchPosts();
+    await fetchPosts(channel as string);
   };
 
   useEffect(() => {
-    if (channel) {
+    if (channel && isSignedIn) {
       fetchPosts(channel as string);
     }
-  }, [channel]);
-  
+  }, [channel, isSignedIn]); // ✅ re-run when sign-in status changes
+
+  if (!isSignedIn) {
+    return (
+      <div className="max-w-xl mx-auto mt-10 text-center text-gray-700 text-lg">
+        Please sign in to view and participate in this discussion.
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-4xl mx-auto p-6 font-hand">
@@ -83,9 +88,7 @@ export default function ChannelDiscussion() {
       {posts.map((post, index) => (
         <div
           key={post.id}
-          className={`p-5 rounded-2xl mb-6 text-white shadow-lg transition-all border border-gray-100 ${
-            cardColor(index)
-          }`}
+          className={`p-5 rounded-2xl mb-6 text-white shadow-lg transition-all border border-gray-100 ${cardColor(index)}`}
         >
           <p className="text-lg font-semibold mb-2">
             {post.author}: <span className="font-normal">{post.question}</span>
@@ -109,7 +112,6 @@ export default function ChannelDiscussion() {
   );
 }
 
-// Gradient/tinted color for each post
 function cardColor(index: number) {
   const colors = [
     "bg-red-500",
@@ -126,7 +128,6 @@ function cardColor(index: number) {
   return colors[index % colors.length];
 }
 
-// Reply input component
 function ReplyInput({ onSubmit }: { onSubmit: (text: string) => void }) {
   const [text, setText] = useState("");
   return (
