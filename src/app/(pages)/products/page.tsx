@@ -4,6 +4,8 @@ import { CldUploadButton } from "next-cloudinary";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Image from "next/image";
+import { useUser } from "@clerk/nextjs";
+
 
 interface Product {
   id: number;
@@ -24,6 +26,8 @@ export default function ProductsPage() {
   });
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
+  const { isSignedIn } = useUser();
+
 
   const fetchProducts = async () => {
     const res = await axios.get("/api/products");
@@ -36,6 +40,12 @@ export default function ProductsPage() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+  
+    if (!isSignedIn) {
+      alert("You must be signed in to list a product.");
+      return;
+    }
+  
     setLoading(true);
     try {
       await axios.post("/api/products", formData, {
@@ -57,6 +67,7 @@ export default function ProductsPage() {
       setLoading(false);
     }
   };
+  
 
   useEffect(() => {
     fetchProducts();
