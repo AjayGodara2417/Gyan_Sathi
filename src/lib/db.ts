@@ -1,7 +1,7 @@
 // lib/db.ts
 import mysql from "mysql2/promise";
-import fs from "fs";
-import path from "path";
+// import fs from "fs";
+// import path from "path";
 
 const {
   aiven_HOST,
@@ -23,6 +23,6 @@ export const db = await mysql.createConnection({
   password: aiven_PASSWORD,
   database: aiven_NAME,
   ssl: {
-    ca: fs.readFileSync(path.join(process.cwd(), aiven_SSL_CA_PATH))
+    ca: process.env.AIVEN_SSL_CA
   }
 });
