@@ -1,46 +1,40 @@
-import React from 'react'
-import Link from 'next/link'
+'use client';
+
+import React from 'react';
+import Link from 'next/link';
 
 export default function Footer() {
   return (
-   <footer className="bg-black text-gray-400 py-10 px-4 sm:px-10 mt-auto border-t border-gray-800"> 
-     <div className="max-w-7xl mx-auto">
-       <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-8">
-         <div>
-           <div className="text-white text-lg font-bold mb-2">Logo</div>
-           <p className="text-sm">Level 1, 12 Sample St, Sydney NSW 2000</p>
-           <p className="text-sm mt-1">1800 123 456<br />info@educate.com</p>
-         </div>
-         <div>
-           <h4 className="text-white font-semibold mb-2">Student Resources</h4>
-           <ul className="space-y-1 text-sm">
-             <li><Link href="/notes" className="hover:text-orange-400 transition-colors">Upload Notes</Link></li>
-             <li><Link href="/notes" className="hover:text-orange-400 transition-colors">Download Notes</Link></li>
-             <li><Link href="/ai" className="hover:text-orange-400 transition-colors">Ask Questions</Link></li>
-           </ul>
-         </div>
-         <div>
-           <h4 className="text-white font-semibold mb-2">Community</h4>
-           <ul className="space-y-1 text-sm">
-             <li><Link href="/discussion" className="hover:text-orange-400 transition-colors">Discussion Forum</Link></li>
-             <li><Link href="/discussion" className="hover:text-orange-400 transition-colors">Study Groups</Link></li>
-             <li><Link href="#" className="hover:text-orange-400 transition-colors">Blog Posts</Link></li>
-           </ul>
-         </div>
-         <div>
-           <h4 className="text-white font-semibold mb-2">More</h4>
-           <ul className="space-y-1 text-sm">
-             <li><Link href="#" className="hover:text-orange-400 transition-colors">Help Center</Link></li>
-             <li><Link href="#" className="hover:text-orange-400 transition-colors">User Feedback</Link></li>
-             <li><Link href="/contactus" className="hover:text-orange-400 transition-colors">Contact Us</Link></li>
-           </ul>
-         </div>
-       </div>
-       
-       <div className="text-sm text-center border-t border-gray-800 pt-6">
-         © 2025 Educate. All rights reserved. | <Link href="#" className="hover:text-orange-400">Privacy Policy</Link> | <Link href="#" className="hover:text-orange-400">Terms of Service</Link>
-       </div>
-     </div>
-   </footer>
-  )
+    <footer className="bg-gray-100 border-t border-gray-200 mt-20 py-10 px-4 sm:px-10">
+      <div className="max-w-7xl mx-auto space-y-6 text-center sm:text-left">
+        {/* Navigation Links */}
+        <div className="flex flex-col sm:flex-row justify-center sm:justify-between items-center gap-4 text-sm text-gray-700">
+          <Link href="/notes" className="hover:text-green-600 transition-colors">
+            Download Notes
+          </Link>
+          <Link href="/ai" className="hover:text-green-600 transition-colors">
+            Ask Questions
+          </Link>
+          <Link href="/about" className="hover:text-green-600 transition-colors">
+            About
+          </Link>
+          <Link href="/contactus" className="hover:text-green-600 transition-colors">
+            Contact Us
+          </Link>
+        </div>
+
+        {/* Divider */}
+        <div className="border-t border-gray-300" />
+
+        {/* Copyright */}
+        <div className="text-xs text-gray-500 text-center space-x-2">
+          <span>© {new Date().getFullYear()} Educate. All rights reserved.</span>
+          <span>|</span>
+          <Link href="#" className="hover:text-green-600">Privacy Policy</Link>
+          <span>|</span>
+          <Link href="#" className="hover:text-green-600">Terms of Service</Link>
+        </div>
+      </div>
+    </footer>
+  );
 }

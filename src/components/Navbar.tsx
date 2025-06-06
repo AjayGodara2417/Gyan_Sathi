@@ -1,89 +1,90 @@
-'use client';
+"use client";
 import {
   SignInButton,
   SignOutButton,
   SignUpButton,
-  // UserButton,
   SignedIn,
   SignedOut,
+  UserButton,
+  useUser,
 } from "@clerk/nextjs";
-import Link from 'next/link';
-import { useState } from 'react';
-import { Menu, X } from 'lucide-react'; // Optional: for icons, or use emoji fallback
+import Link from "next/link";
+import {
+  Home,
+  BookOpen,
+  Hash,
+  ShoppingBag,
+  Contact,
+  AtSign,
+  Brain,
+  HelpCircle,
+} from "lucide-react";
+
+const navItems = [
+  { name: "Home", href: "/", icon: <Home size={20} /> },
+  { name: "Notes", href: "/notes", icon: <BookOpen size={20} /> },
+  { name: "Channels", href: "/discussion", icon: <Hash size={20} /> },
+  { name: "AI", href: "/ai", icon: <Brain size={20} /> },
+  { name: "Q&A", href: "/question", icon: <HelpCircle size={20} /> },
+  { name: "Marketplace", href: "/products", icon: <ShoppingBag size={20} /> },
+  { name: "About", href: "/about", icon: <AtSign size={20} /> },
+  { name: "Contact Us", href: "/contactus", icon: <Contact size={20} /> },
+];
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { user } = useUser();
 
   return (
-    <header className="bg-black text-white px-4 sm:px-10 py-4 shadow-md sticky top-0 z-50">
-      <div className="flex justify-between items-center">
-        {/* Logo */}
-        <Link href="/" className="text-2xl font-extrabold tracking-wide hover:text-orange-400 transition-colors">
-          Gyan Saathi
-        </Link>
+    <aside className="w-[260px] h-screen bg-white border-r border-gray-200 flex flex-col justify-between px-6 py-8 fixed">
+      {/* Top: Profile + Nav */}
+      <div>
+        {/* Profile */}
+        <div className="flex items-center gap-3 mb-8 pl-4">
+          <UserButton afterSignOutUrl="/" />
+          <div>
+            <p className="font-semibold">{user?.fullName ?? "Hi, Guest"}</p>
+            <p className="text-sm text-gray-500">Student</p>
+          </div>
+        </div>
 
-        {/* Desktop Links */}
-        <nav className="hidden md:flex gap-6 text-md font-medium items-center">
-          {['Home', 'AI', 'Notes', 'Discussion', 'Products', 'About', 'Contact Us'].map((item, i) => (
+        {/* Navigation */}
+        <nav className="flex flex-col gap-1">
+          {navItems.map((item, i) => (
             <Link
               key={i}
-              href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(/\s+/g, '')}`}
-              className="hover:text-orange-400 transition-colors"
+              href={item.href}
+              className="flex items-center gap-3 text-gray-700 hover:bg-green-100 px-4 py-2 rounded-md transition-all"
             >
-              {item}
+              {item.icon}
+              <span>{item.name}</span>
             </Link>
           ))}
-
-          {/* Sign up */}
-          <SignedOut>
-
-              <SignUpButton mode="modal">
-                <button className="text-white border border-orange-400  hover:bg-orange-400 hover:text-black px-6 py-3 rounded-md font-semibold transition-transform duration-300 hover:scale-105 shadow">
-                  Sign Up
-                </button>
-              </SignUpButton>
-
-              <SignInButton mode="modal">
-                <button className="bg-orange-400 border border-orange-400 text-black px-6 py-3 rounded-md font-semibold transition-transform duration-300 hover:text-white hover:scale-105 shadow">
-                  Sign In
-                </button>
-              </SignInButton>
-            </SignedOut>
-
-            <SignedIn>
-              {/* <Link href="/user-profile" className="text-2xl">👦🏻</Link> */}
-              <SignOutButton>
-                <button className="bg-orange-400 text-black hover:text-white px-6 py-3 rounded-md font-semibold transition-transform duration-300 hover:scale-105 shadow">Sign Out</button>
-              </SignOutButton>
-            </SignedIn>
         </nav>
-
-        {/* Mobile Toggle */}
-        <button
-          className="md:hidden"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle navigation"
-        >
-          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
       </div>
 
-      {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden mt-4 flex flex-col gap-4 text-sm font-medium">
-          {['Home', 'AI', 'Notes', 'Discussion', 'About', 'Contact Us'].map((item, i) => (
-            <Link
-              key={i}
-              href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(/\s+/g, '')}`}
-              className="hover:text-orange-400 transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              {item}
-            </Link>
-          ))}
-        </div>
-      )}
-    </header>
+      {/* Bottom: Auth */}
+      <div className="flex flex-col gap-2">
+        <SignedOut>
+        <SignUpButton mode="modal">
+            <button className="w-full bg-green-100 text-green-600 hover:text-white py-2 rounded-md hover:bg-green-500 transition">
+              Sign Up
+            </button>
+          </SignUpButton>
+          <SignInButton mode="modal">
+            <button className="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition">
+              Sign In
+            </button>
+          </SignInButton>
+        </SignedOut>
+        <SignedIn>
+          <SignOutButton>
+            <button className="w-full bg-red-100 text-red-600 py-2 rounded-md hover:bg-red-200 transition">
+              Sign Out
+            </button>
+          </SignOutButton>
+        </SignedIn>
+      </div>
+    </aside>
   );
 };
 
