@@ -1,73 +1,123 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { BookOpen, FlaskConical, Paintbrush, Code2, Globe, GraduationCap } from "lucide-react";
 
-// VIBGYOR & extra vibrant colors
-const cardColors = [
-  "bg-red-500",     // Red
-  "bg-orange-500",  // Orange
-  "bg-yellow-400",  // Yellow
-  "bg-green-500",   // Green
-  "bg-blue-500",    // Blue
-  "bg-indigo-500",  // Indigo
-  "bg-violet-500",  // Violet
-  "bg-pink-500",    // Pink
-  "bg-teal-500",    // Teal
-  "bg-rose-500",    // Rose
-  "bg-emerald-500", // Emerald
-  "bg-cyan-500",    // Cyan
-  "bg-lime-500",    // Lime
-  "bg-purple-500",  // Purple
-  "bg-sky-500",     // Sky
-  "bg-amber-500",   // Amber
-  "bg-fuchsia-500", // Fuchsia
-  "bg-indigo-400",  // Bonus shade
-  "bg-blue-700",    // Deep blue
-  "bg-red-600"      // Deep red
+const featured = [
+  {
+    title: "Study Group",
+    description: "Join fellow students in collaborative study sessions.",
+    bg: "bg-yellow-100",
+  },
+  {
+    title: "Coding Club",
+    description: "Explore coding challenges and projects together.",
+    bg: "bg-teal-100",
+  },
+  {
+    title: "Design Discussions",
+    description: "Share design ideas and get feedback on your work.",
+    bg: "bg-lime-100",
+  },
+];
+
+const categories = [
+  { name: "Academics", icon: <GraduationCap className="w-4 h-4 mr-1" /> },
+  { name: "Technology", icon: <Code2 className="w-4 h-4 mr-1" /> },
+  { name: "Design", icon: <Paintbrush className="w-4 h-4 mr-1" /> },
+  { name: "Science", icon: <FlaskConical className="w-4 h-4 mr-1" /> },
+  { name: "Literature", icon: <BookOpen className="w-4 h-4 mr-1" /> },
+  { name: "General", icon: <Globe className="w-4 h-4 mr-1" /> },
+];
+
+const popular = [
+  { name: "Math Enthusiasts", count: 120 },
+  { name: "History Buffs", count: 95 },
+  { name: "Science Explorers", count: 150 },
+  { name: "Literature Lovers", count: 80 },
 ];
 
 const channels = [
-  "Technology",
-  "AI",
-  "Coding",
-  "Computer Science",
-  "Science",
-  "English",
-  "Physics",
-  "Chemistry",
-  "Maths",
-  "Biology",
-  "History",
-  "Geography",
-  "Economics",
-  "Art",
-  "Politics",
-  "Music",
-  "Dance",
-  "Theatre",
-  "Literature",
-  "Philosophy"
+  "Technology", "AI", "Coding", "Computer Science", "Science", "English", "Physics", "Chemistry",
+  "Maths", "Biology", "History", "Geography", "Economics", "Art", "Politics", "Music", "Dance",
+  "Theatre", "Literature", "Philosophy"
 ];
 
 export default function DiscussionHome() {
   const router = useRouter();
 
   return (
-    <div className="p-6 font-hand min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white px-6 py-10">
-      <h1 className="text-4xl font-bold text-center mb-10 text-blue-900">Join a Discussion Channel</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {channels.map((name, index) => (
-          <div
-            key={name}
-            className={`relative p-6 rounded-2xl shadow-lg text-white cursor-pointer transition-transform transform hover:scale-105 ${cardColors[index % cardColors.length]}`}
-            onClick={() => router.push(`/discussion/${name.toLowerCase().replace(/\s+/g, '-')}`)}
-          >
-            <h2 className="text-2xl font-semibold mb-2">{name}</h2>
-            <p className="text-sm opacity-90">Join conversations, share thoughts, and explore {name} with others.</p>
-            <div className="absolute top-4 right-4 text-white opacity-30 text-xl">★</div>
-          </div>
-        ))}
-      </div>
+    <div className="min-h-screen px-6 py-10 bg-gray-50 text-gray-900">
+      <h1 className="text-3xl font-bold text-center mb-10">Channels</h1>
+
+      {/* Featured */}
+      <section className="mb-12">
+        <h2 className="text-lg font-semibold mb-4">Featured</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {featured.map((item) => (
+            <div
+              key={item.title}
+              className={`${item.bg} p-6 rounded-xl shadow-sm hover:shadow-md transition`}
+            >
+              <h3 className="text-xl font-semibold">{item.title}</h3>
+              <p className="text-sm mt-2">{item.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Categories */}
+      <section className="mb-12">
+        <h2 className="text-lg font-semibold mb-4">Categories</h2>
+        <div className="flex flex-wrap gap-3">
+          {categories.map((c) => (
+            <button
+              key={c.name}
+              className="flex items-center px-4 py-2 bg-white border border-gray-200 rounded-full shadow-sm hover:bg-gray-100 text-sm"
+            >
+              {c.icon}
+              {c.name}
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {/* Popular Channels */}
+      <section className="mb-12">
+        <h2 className="text-lg font-semibold mb-4">Popular Channels</h2>
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {popular.map((channel) => (
+            <div
+              key={channel.name}
+              className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md border"
+            >
+              <h3 className="text-md font-medium">{channel.name}</h3>
+              <p className="text-xs text-gray-600 mt-1">{channel.count} members</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* All Channels */}
+      <section>
+        <h2 className="text-lg font-semibold mb-4">All Channels</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {channels.map((name) => (
+            <div
+              key={name}
+              className="bg-white p-6 rounded-xl shadow hover:shadow-lg cursor-pointer transition"
+              onClick={() =>
+                router.push(`/discussion/${name.toLowerCase().replace(/\s+/g, '-')}`)
+              }
+            >
+              <h3 className="text-lg font-semibold">{name}</h3>
+              <p className="text-sm mt-1 text-gray-600">
+                Join conversations, share thoughts, and explore {name}.
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

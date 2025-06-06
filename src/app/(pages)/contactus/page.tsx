@@ -35,60 +35,60 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="bg-black text-white min-h-screen px-6 md:px-20 py-16 font-sans">
-      <div className="max-w-3xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6">Contact Us</h1>
-        <p className="text-lg mb-10 text-gray-300">
+    <div className="bg-[#F6FDF8] text-gray-900 min-h-screen px-6 md:px-20 py-16 font-sans">
+      <div className="max-w-4xl mx-auto bg-white rounded-xl shadow p-10">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-green-600">Contact Us</h1>
+        <p className="text-lg mb-10 text-gray-600">
           If you have any questions or need assistance, feel free to reach out to us.
         </p>
 
         <form ref={form} onSubmit={sendEmail} className="space-y-6">
           <div>
-            <label htmlFor="name" className="block text-sm mb-2">Name:</label>
+            <label htmlFor="name" className="block text-sm mb-2 font-medium text-gray-700">Name</label>
             <input
               type="text"
               id="name"
               name="name"
               required
               placeholder="Your Name"
-              className="w-full px-4 py-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-400"
+              className="w-full px-4 py-3 rounded-md border border-green-200 placeholder:text-green-600 bg-white focus:outline-none focus:ring-2 focus:ring-green-400"
             />
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm mb-2">Email:</label>
+            <label htmlFor="email" className="block text-sm mb-2 font-medium text-gray-700">Email</label>
             <input
               type="email"
               id="email"
               name="email"
               required
               placeholder="you@example.com"
-              className="w-full px-4 py-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-400"
+              className="w-full px-4 py-3 rounded-md border border-green-200 placeholder:text-green-600 bg-white focus:outline-none focus:ring-2 focus:ring-green-400"
             />
           </div>
 
           <div>
-            <label htmlFor="message" className="block text-sm mb-2">Message:</label>
+            <label htmlFor="message" className="block text-sm mb-2 font-medium text-gray-700">Message</label>
             <textarea
               id="message"
               name="message"
               rows={4}
               required
               placeholder="Write your message here..."
-              className="w-full px-4 py-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-400"
+              className="w-full px-4 py-3 rounded-md border border-green-200 placeholder:text-green-600 bg-white focus:outline-none focus:ring-2 focus:ring-green-400"
             ></textarea>
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="bg-orange-500 hover:bg-orange-600 transition duration-200 text-white font-semibold py-3 px-6 rounded-xl"
+            className="bg-green-500 hover:bg-green-600 transition duration-200 text-white font-semibold py-3 px-6 rounded-md"
           >
             {loading ? "Sending..." : "Submit"}
           </button>
 
           {submitted && (
-            <p className="mt-4 text-green-400 font-medium">Message sent successfully!</p>
+            <p className="mt-4 text-green-500 font-medium">Message sent successfully!</p>
           )}
         </form>
       </div>

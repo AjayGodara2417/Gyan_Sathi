@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useParams } from "next/navigation";
 import axios from "axios";
-import { useUser } from "@clerk/nextjs"; // ✅ Clerk hook for client-side auth
+import { useUser } from "@clerk/nextjs";
 
 interface Post {
   id: string;
@@ -14,16 +14,16 @@ interface Post {
 
 export default function ChannelDiscussion() {
   const { channel } = useParams();
-  const { isSignedIn, user } = useUser(); // ✅ user object from Clerk
+  const { isSignedIn, user } = useUser();
   const [posts, setPosts] = useState<Post[]>([]);
   const [question, setQuestion] = useState("");
   const [loading, setLoading] = useState(false);
 
-  async function fetchPosts(channel: string) {
-    if (!isSignedIn) return; // ⛔ Don't fetch if not signed in
+  const fetchPosts = useCallback(async (channel: string) => {
+    if (!isSignedIn) return;
     const res = await axios.get(`/api/discussion/${channel}`);
     setPosts(res.data.posts);
-  }
+  }, [isSignedIn]);
 
   const handleAsk = async () => {
     if (!isSignedIn || !question.trim()) return;
@@ -51,7 +51,7 @@ export default function ChannelDiscussion() {
     if (channel && isSignedIn) {
       fetchPosts(channel as string);
     }
-  }, [channel, isSignedIn]); // ✅ re-run when sign-in status changes
+  }, [channel, fetchPosts, isSignedIn]);
 
   if (!isSignedIn) {
     return (
@@ -62,88 +62,79 @@ export default function ChannelDiscussion() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6 font-hand">
-      <h2 className="text-3xl font-bold mb-6 text-center text-blue-800">
-        Discussion Channel: <span className="capitalize">{channel}</span>
+    <div className="max-w-4xl mx-auto px-4 py-10 bg-gray-50 min-h-screen text-gray-800">
+      <h2 className="text-3xl font-bold mb-8 text-center text-blue-800 capitalize">
+        #{channel} Discussions
       </h2>
 
-      {/* Ask Question Section */}
-      <div className="bg-white p-4 rounded-xl shadow mb-8 border border-gray-200">
+      {/* Ask Question */}
+      <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm mb-10">
         <textarea
           placeholder="Ask a question..."
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
-          className="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-3 text-gray-800"
+          className="w-full h-24 p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none text-gray-800"
         />
-        <button
-          onClick={handleAsk}
-          disabled={loading}
-          className="bg-orange-600 hover:bg-orange-700 text-white py-2 px-4 rounded-md font-semibold transition"
-        >
-          {loading ? "Posting..." : "Post Question"}
-        </button>
+        <div className="mt-4 text-right">
+          <button
+            onClick={handleAsk}
+            disabled={loading}
+            className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-5 rounded-lg font-medium shadow"
+          >
+            {loading ? "Posting..." : "Post Question"}
+          </button>
+        </div>
       </div>
 
       {/* Posts */}
-      {posts.map((post, index) => (
-        <div
-          key={post.id}
-          className={`p-5 rounded-2xl mb-6 text-white shadow-lg transition-all border border-gray-100 ${cardColor(index)}`}
-        >
-          <p className="text-lg font-semibold mb-2">
-            {post.author}: <span className="font-normal">{post.question}</span>
-          </p>
+      {posts.length === 0 ? (
+        <p className="text-center text-gray-500">No posts yet. Be the first to ask!</p>
+      ) : (
+        posts.map((post) => (
+          <div
+            key={post.id}
+            className="bg-white p-6 rounded-2xl mb-6 border border-gray-200 shadow-md transition-all"
+          >
+            <p className="text-lg font-semibold mb-2">
+              {post.author} asked:
+              <span className="block font-normal text-gray-700 mt-1">{post.question}</span>
+            </p>
 
-          <div className="ml-4 space-y-2">
-            {post.replies.map((r) => (
-              <div
-                key={r.id}
-                className="bg-white/20 backdrop-blur-md rounded px-3 py-2 text-sm"
-              >
-                <strong>{r.author}:</strong> {r.text}
-              </div>
-            ))}
+            <div className="ml-4 mt-4 space-y-3">
+              {post.replies.map((r) => (
+                <div
+                  key={r.id}
+                  className="bg-gray-100 border border-gray-200 rounded-lg px-4 py-2 text-sm"
+                >
+                  <strong className="text-blue-700">{r.author}</strong>: {r.text}
+                </div>
+              ))}
+            </div>
+
+            <ReplyInput onSubmit={(text) => handleReply(post.id, text)} />
           </div>
-
-          <ReplyInput onSubmit={(text) => handleReply(post.id, text)} />
-        </div>
-      ))}
+        ))
+      )}
     </div>
   );
-}
-
-function cardColor(index: number) {
-  const colors = [
-    "bg-red-500",
-    "bg-orange-500",
-    "bg-yellow-400 text-black",
-    "bg-green-500",
-    "bg-blue-500",
-    "bg-indigo-500",
-    "bg-violet-500",
-    "bg-pink-500",
-    "bg-teal-500",
-    "bg-rose-500",
-  ];
-  return colors[index % colors.length];
 }
 
 function ReplyInput({ onSubmit }: { onSubmit: (text: string) => void }) {
   const [text, setText] = useState("");
   return (
-    <div className="mt-4 flex gap-2">
+    <div className="mt-5 flex gap-3">
       <input
         value={text}
         onChange={(e) => setText(e.target.value)}
-        placeholder="Your reply..."
-        className="flex-1 p-2 rounded-lg border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Write a reply..."
+        className="flex-1 p-2.5 rounded-lg border border-gray-300 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"
       />
       <button
         onClick={() => {
           onSubmit(text);
           setText("");
         }}
-        className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium"
+        className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium shadow"
       >
         Reply
       </button>
