@@ -108,7 +108,7 @@ export default function ProductsPage() {
         {/* Featured Products - Static Preview */}
         <h2 className="text-xl font-semibold mb-4">Latest Products</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-10">
-          {products.slice(0,3).map((item) => (
+          {products.slice(0,3).map((item, i) => (
             <div key={i} className="bg-white p-4 rounded-lg shadow">
               <Image
                 src={item.image_url}
