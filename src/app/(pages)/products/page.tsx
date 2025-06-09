@@ -106,8 +106,23 @@ export default function ProductsPage() {
         </div>
 
         {/* Featured Products - Static Preview */}
-        <h2 className="text-xl font-semibold mb-4">Featured Products</h2>
+        <h2 className="text-xl font-semibold mb-4">Latest Products</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-10">
+          {products.slice(0,3).map((item) => (
+            <div key={i} className="bg-white p-4 rounded-lg shadow">
+              <Image
+                src={item.image_url}
+                alt={item.title}
+                width={400}
+                height={300}
+                className="h-40 w-full object-cover rounded"
+              />
+              <h3 className="text-lg font-semibold mt-2">{item.title}</h3>
+              <p className="text-sm text-gray-600">{item.description}</p>
+            </div>
+          ))}
+        </div>
+{/*         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-10">
           {[
             {
               title: "Laptop",
@@ -137,7 +152,7 @@ export default function ProductsPage() {
               <p className="text-sm text-gray-600">{item.desc}</p>
             </div>
           ))}
-        </div>
+        </div> */}
 
         {/* All Products */}
         <h2 className="text-xl font-semibold mb-4">All Products</h2>
