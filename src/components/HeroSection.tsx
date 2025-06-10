@@ -1,5 +1,6 @@
 // components/HeroSection.tsx
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function HeroSection() {
   return (
@@ -23,7 +24,7 @@ export default function HeroSection() {
           Access a wealth of study resources, connect with peers, and enhance your learning experience.
         </p>
         <button className="bg-green-500 hover:bg-green-600 text-white font-semibold px-5 py-2 rounded-full transition">
-          Get Started
+          <Link rel="stylesheet" href="/notes">Get Started</Link>
         </button>
       </div>
     </section>
