@@ -56,6 +56,7 @@ export default function DiscussionHome() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {featured.map((item) => (
             <div
+              onClick={() => router.push(`/discussion/${item.title.toLowerCase().replace(/\s+/g, '-')}`)}
               key={item.title}
               className={`${item.bg} p-6 rounded-xl shadow-sm hover:shadow-md transition`}
             >
@@ -85,9 +86,10 @@ export default function DiscussionHome() {
       {/* Popular Channels */}
       <section className="mb-12">
         <h2 className="text-lg font-semibold mb-4">Popular Channels</h2>
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4" >
           {popular.map((channel) => (
             <div
+              onClick={() => router.push(`/discussion/${channel.name.toLowerCase().replace(/\s+/g, '-')}`)}
               key={channel.name}
               className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md border"
             >
