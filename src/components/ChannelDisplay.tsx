@@ -29,7 +29,7 @@ const categories = [
 ];
 export default function ChannelDisplay() {
   return (
-   <div className="px-6 bg-gray-50 text-gray-900">
+   <div className="px-6 py-6 bg-gray-50 text-gray-900">
    <h1 className="text-3xl font-bold text-center mb-10">Join a Discussion</h1>
 
    {/* Featured */}

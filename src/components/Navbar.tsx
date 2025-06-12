@@ -35,7 +35,7 @@ const Navbar = () => {
   const { user } = useUser();
 
   return (
-    <aside className="w-[260px] h-screen bg-white border-r border-gray-200 flex flex-col justify-between px-6 py-8 fixed">
+    <aside className="w-[260px] h-screen bg-amber-100 border-r border-black-200 flex flex-col justify-between px-6 py-8 fixed">
       {/* Top: Profile + Nav */}
       <div>
         {/* Profile */}
