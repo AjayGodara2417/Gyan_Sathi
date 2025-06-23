@@ -236,6 +236,16 @@ Get the EMAILJS_SERVICE_ID
 Get the EMAILJS_PUBLIC_KEY
 ```
 
+create two templates:
+1. for contact us page
+2. for Q&A page
+
+Get the templete id for both the templates
+```bash
+Get the EMAILJS_TEMPLATE_ID_CONTACTUS
+Get the EMAILJS_TEMPLATE_ID_ASK_QUE
+```
+
 #### Set up Environment variables (take refrence from .env.example file)
 ```bash
 Create a .env.local file
