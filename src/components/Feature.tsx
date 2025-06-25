@@ -32,11 +32,11 @@ export default function Feature() {
 //       ))}
 //     </div>
 //  </section>
-<section className='px-6'>
-        <h2 className="text-xl font-semibold text-gray-700 mb-2">Key Features</h2>
+<section className='px-4 w-[90%] mx-auto'>
         <h1 className="text-4xl font-extrabold mb-3 text-gray-900">
           Unlock Your Potential with Our Platform
         </h1>
+        <h2 className="text-xl font-semibold text-gray-700 mb-2">Key Features</h2>
         <p className="text-gray-600 mb-8 max-w-2xl text-base">
           Explore the features designed to support your academic success.
         </p>

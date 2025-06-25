@@ -29,11 +29,11 @@ const categories = [
 ];
 export default function ChannelDisplay() {
   return (
-   <div className="px-6 py-6 bg-gray-50 text-gray-900">
+   <div className="px-6 py-6 bg-gray-50 text-gray-900  w-[90%] mx-auto">
    <h1 className="text-3xl font-bold text-center mb-10">Join a Discussion</h1>
 
    {/* Featured */}
-   <section className="mb-12">
+   <section className="mb-12" >
      <h2 className="text-lg font-semibold mb-4">Featured</h2>
      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
        {featured.map((item) => (
