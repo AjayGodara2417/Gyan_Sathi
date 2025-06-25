@@ -5,9 +5,9 @@ export default function Testimonial() {
   return (
     <div>
     {/* Student Testimonial */}
-    <section>
+    <section className='w-[90%] mx-auto'>
     <h2 className="text-3xl font-bold text-center mb-10">Student Testimonials</h2>
-    <div className="relative rounded-2xl overflow-hidden bg-gray-100 h-64 sm:h-72">
+    <div className="relative rounded-2xl overflow-hidden bg-gray-100 h-64 sm:h-72 transition-all duration-300 hover:shadow-xl hover:scale-[1.02]">
       <Image
         src="/testi.png"
         alt="Testimonial"
