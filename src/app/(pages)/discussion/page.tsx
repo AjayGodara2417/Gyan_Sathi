@@ -43,6 +43,36 @@ const channels = [
   "Theatre", "Literature", "Philosophy"
 ];
 
+// Color combinations for channel cards
+const colorSchemes = [
+  { bg: "bg-blue-50", border: "border-blue-200", text: "text-blue-800" },
+  { bg: "bg-green-50", border: "border-green-200", text: "text-green-800" },
+  { bg: "bg-purple-50", border: "border-purple-200", text: "text-purple-800" },
+  { bg: "bg-pink-50", border: "border-pink-200", text: "text-pink-800" },
+  { bg: "bg-orange-50", border: "border-orange-200", text: "text-orange-800" },
+  { bg: "bg-teal-50", border: "border-teal-200", text: "text-teal-800" },
+  { bg: "bg-indigo-50", border: "border-indigo-200", text: "text-indigo-800" },
+  { bg: "bg-red-50", border: "border-red-200", text: "text-red-800" },
+  { bg: "bg-yellow-50", border: "border-yellow-200", text: "text-yellow-800" },
+  { bg: "bg-cyan-50", border: "border-cyan-200", text: "text-cyan-800" },
+  { bg: "bg-emerald-50", border: "border-emerald-200", text: "text-emerald-800" },
+  { bg: "bg-violet-50", border: "border-violet-200", text: "text-violet-800" },
+  { bg: "bg-rose-50", border: "border-rose-200", text: "text-rose-800" },
+  { bg: "bg-amber-50", border: "border-amber-200", text: "text-amber-800" },
+  { bg: "bg-sky-50", border: "border-sky-200", text: "text-sky-800" },
+  { bg: "bg-lime-50", border: "border-lime-200", text: "text-lime-800" },
+  { bg: "bg-fuchsia-50", border: "border-fuchsia-200", text: "text-fuchsia-800" },
+  { bg: "bg-slate-50", border: "border-slate-200", text: "text-slate-800" },
+  { bg: "bg-gray-50", border: "border-gray-200", text: "text-gray-800" },
+  { bg: "bg-zinc-50", border: "border-zinc-200", text: "text-zinc-800" },
+  { bg: "bg-neutral-50", border: "border-neutral-200", text: "text-neutral-800" },
+];
+
+// Function to get a random color scheme
+const getRandomColorScheme = () => {
+  return colorSchemes[Math.floor(Math.random() * colorSchemes.length)];
+};
+
 export default function DiscussionHome() {
   const router = useRouter();
 
@@ -104,20 +134,23 @@ export default function DiscussionHome() {
       <section>
         <h2 className="text-lg font-semibold mb-4">All Channels</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {channels.map((name) => (
-            <div
-              key={name}
-              className="bg-white p-6 rounded-xl shadow hover:shadow-lg cursor-pointer transition"
-              onClick={() =>
-                router.push(`/discussion/${name.toLowerCase().replace(/\s+/g, '-')}`)
-              }
-            >
-              <h3 className="text-lg font-semibold">{name}</h3>
-              <p className="text-sm mt-1 text-gray-600">
-                Join conversations, share thoughts, and explore {name}.
-              </p>
-            </div>
-          ))}
+          {channels.map((name) => {
+            const colorScheme = getRandomColorScheme();
+            return (
+              <div
+                key={name}
+                className={`${colorScheme.bg} ${colorScheme.border} p-6 rounded-xl shadow hover:shadow-lg cursor-pointer transition border`}
+                onClick={() =>
+                  router.push(`/discussion/${name.toLowerCase().replace(/\s+/g, '-')}`)
+                }
+              >
+                <h3 className={`text-lg font-semibold ${colorScheme.text}`}>{name}</h3>
+                <p className="text-sm mt-1 text-gray-600">
+                  Join conversations, share thoughts, and explore {name}.
+                </p>
+              </div>
+            );
+          })}
         </div>
       </section>
     </div>
