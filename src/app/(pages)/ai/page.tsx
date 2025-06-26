@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Copy, RefreshCcw, Menu, X } from "lucide-react";
+import { Copy, RefreshCcw, PanelRightClose, PanelLeftClose } from "lucide-react";
 import { useUser } from "@clerk/nextjs";
 
 interface ChatHistory {
@@ -92,16 +92,16 @@ export default function AIPage() {
     <div className="flex flex-col md:flex-row bg-[#F6FDF8] text-gray-900 relative">
       <button
         onClick={() => setIsHistorybarOpen(!isHistorybarOpen)}
-        className="md:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-white border border-gray-300 shadow hover:bg-gray-100"
+        className="md:hidden fixed top-12 right-1 z-50 p-3 hover:bg-gray-100"
         aria-label="Toggle historybar"
       >
-        {isHistorybarOpen ? <X size={24} /> : <Menu size={24} />}
+        {isHistorybarOpen ? <PanelRightClose size={24} /> : <PanelLeftClose size={24} />}
       </button>
 
       <aside
         id="historybar"
-        className={`fixed md:static w-64 bg-white border-r border-gray-200 p-4 md:p-6 space-y-6 z-40 transition-transform duration-300 ease-in-out ${
-          isHistorybarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+        className={`fixed md:static w-44 right-0 bg-white border-l border-gray-200 p-4 md:p-6 space-y-6 z-40 transition-transform duration-300 ease-in-out ${
+          isHistorybarOpen ? 'translate-x-0' : 'translate-x-full md:translate-x-0'
         } h-full md:h-auto overflow-y-auto`}
       >
         <h2 className="text-xl font-bold mb-4">History</h2>
