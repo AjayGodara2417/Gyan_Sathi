@@ -3,19 +3,19 @@ import Link from 'next/link';
 
 export default function HeroSection() {
   return (
-    <section className="relative w-[90%] mx-auto h-96 sm:h-96 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-[1.02]">
+    <section className="relative w-[90%] mx-auto h-fit sm:h-96 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-[1.02]">
       {/* Background image */}
       <Image
-        src="/testimonial.png"
+        src="/gpt2.png"
         alt="Study Plant"
         layout="fill"
         objectFit="cover"
-        className="opacity-80"
+        className="opacity-85 transition-opacity duration-500 hover:opacity-100"
         priority
       />
 
       {/* Overlay */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-center ">
+      <div className="absolute text-white inset-0 flex flex-col items-center justify-center text-center ">
         <h1 className="text-2xl sm:text-4xl font-extrabold mb-2">
           Your Study Journey Starts Here
         </h1>
