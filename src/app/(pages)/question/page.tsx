@@ -37,8 +37,8 @@ export default function Page() {
   };
 
   return (
-    <div className="bg-[#F6FDF8] text-gray-900 px-6 md:px-20 py-16 font-sans">
-      <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div className="bg-[#F6FDF8] text-gray-900 px-6 md:px-20 md:pt-24 font-sans">
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
         <div className="md:col-span-2">
           <h2 className="text-2xl font-semibold mb-4">Ask a question</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
