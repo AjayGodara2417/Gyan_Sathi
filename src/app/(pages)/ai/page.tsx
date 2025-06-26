@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Copy, RefreshCcw, Menu, X, PanelRightClose, PanelLeftClose } from "lucide-react";
+import { Copy, RefreshCcw, PanelRightClose, PanelLeftClose } from "lucide-react";
 import { useUser } from "@clerk/nextjs";
 
 interface ChatHistory {
