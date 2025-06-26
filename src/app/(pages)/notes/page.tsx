@@ -67,7 +67,7 @@ export default function NotesPage() {
   }, []);
 
   return (
-    <div className="min-h-screen max-w-full bg-gray-50 px-8 py-10 text-gray-900">
+    <div className="min-h-screen max-w-full bg-gray-50 px-8 py-2 md:py-10 text-gray-900">
       {/* Heading and Upload Button */}
       <div className="flex flex-col gap-2 sm:flex-row justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Notes</h1>
