@@ -76,7 +76,7 @@ export default function ProductsPage() {
   return (
     <div className="bg-[#F6FDF8] text-gray-900 min-h-screen px-6 py-10 font-sans">
       <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-between mb-2">
+        <div className="flex flex-col sm:flex-row items-center justify-between mb-2">
           <h1 className="text-3xl font-bold mb-6">Marketplace</h1>
           <div className="flex justify-between items-center mb-6">
             <button
