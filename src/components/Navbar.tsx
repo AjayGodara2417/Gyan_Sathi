@@ -90,7 +90,7 @@ const Navbar = () => {
     <>
       {/* Hamburger Icon (only on mobile) */}
       <button
-        className="md:hidden fixed top-4 left-4 z-50 bg-amber-100 p-2 rounded-md shadow"
+        className="md:hidden fixed z-50 p-3 w-full bg-amber-100 text-gray-700 hover:bg-transparent transition"
         onClick={() => setMobileOpen(!mobileOpen)}
       >
         {mobileOpen ? <X size={24} /> : <Menu size={24} />}
@@ -98,7 +98,7 @@ const Navbar = () => {
 
       {/* Mobile Sidebar (overlay) */}
       <div
-        className={`fixed top-0 left-0 h-full w-64 bg-amber-100 z-40 shadow-lg p-6 transform transition-transform duration-300 ease-in-out ${
+        className={`fixed top-5 left-0 h-full w-64 bg-amber-100 z-40 shadow-lg p-6 transform transition-transform duration-300 ease-in-out ${
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         } md:hidden`}
       >
