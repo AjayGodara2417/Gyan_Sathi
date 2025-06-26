@@ -1,4 +1,3 @@
-// components/HeroSection.tsx
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -7,7 +6,7 @@ export default function HeroSection() {
     <section className="relative w-[90%] mx-auto h-96 sm:h-96 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-[1.02]">
       {/* Background image */}
       <Image
-        src="/testimonial.png" // <-- Replace with actual path like /public/images/hero-plant.png
+        src="/testimonial.png"
         alt="Study Plant"
         layout="fill"
         objectFit="cover"
