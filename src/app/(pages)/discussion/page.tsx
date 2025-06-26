@@ -77,7 +77,7 @@ export default function DiscussionHome() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen px-6 py-10 bg-gray-50 text-gray-900">
+    <div className="min-h-screen px-6 py-2 md:py-10 bg-gray-50 text-gray-900">
       <h1 className="text-3xl font-bold text-center mb-10">Channels</h1>
 
       {/* Featured */}
