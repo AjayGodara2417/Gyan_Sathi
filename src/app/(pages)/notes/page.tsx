@@ -68,6 +68,7 @@ export default function NotesPage() {
 
   return (
     <div className="min-h-screen max-w-full bg-gray-50 px-8 py-2 md:py-10 text-gray-900">
+
       {/* Heading and Upload Button */}
       <div className="flex flex-col gap-2 sm:flex-row justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Notes</h1>
@@ -113,8 +114,8 @@ export default function NotesPage() {
       </div>
 
       {/* Popular Notes */}
-      <div className="mb-12">
-        <h2 className="text-lg font-semibold mb-3">Popular Notes</h2>
+      <h2 className="mt-12 text-lg font-semibold mb-3">Popular Notes</h2>
+      <div className="mb-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
         <div className="flex overflow-x-auto space-x-4 pb-2">
           {notes.slice(0, 5).map((note) => (
             <NoteCard key={note.id} note={note} horizontal />
