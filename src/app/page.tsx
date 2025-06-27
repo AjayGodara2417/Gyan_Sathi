@@ -1,6 +1,5 @@
 'use client';
 
-import ChannelDisplay from "@/components/ChannelDisplay";
 import Feature from "@/components/Feature";
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
@@ -15,8 +14,6 @@ export default function Home() {
       <HeroSection />
 
       <Feature />
-
-      <ChannelDisplay />
 
       <Testimonial />
 
