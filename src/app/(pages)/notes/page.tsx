@@ -115,8 +115,8 @@ export default function NotesPage() {
 
       {/* Popular Notes */}
       <h2 className="mt-12 text-lg font-semibold mb-3">Popular Notes</h2>
-      <div className="mb-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-        <div className="flex overflow-x-auto space-x-4 pb-2">
+      <div className="mb-12">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {notes.slice(0, 5).map((note) => (
             <NoteCard key={note.id} note={note} horizontal />
           ))}
