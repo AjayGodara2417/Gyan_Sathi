@@ -3,14 +3,14 @@ import Link from 'next/link';
 
 export default function HeroSection() {
   return (
-    <section className="relative w-[90%] mx-auto h-fit sm:h-96 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-[1.02]">
+    <section className="relative w-[90%] mx-auto h-96 sm:h-96 rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:scale-[1.02]">
       {/* Background image */}
       <Image
         src="/gpt2.png"
         alt="Study Plant"
         layout="fill"
         objectFit="cover"
-        className="opacity-85 transition-opacity duration-500 hover:opacity-100"
+        className="opacity-90"
         priority
       />
 

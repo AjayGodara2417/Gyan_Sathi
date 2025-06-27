@@ -9,11 +9,11 @@ export default function Testimonial() {
     <h2 className="text-3xl font-bold text-center mb-10">Student Testimonials</h2>
     <div className="relative rounded-2xl overflow-hidden bg-gray-100 h-64 sm:h-72 transition-all duration-300 hover:shadow-xl hover:scale-[1.02]">
       <Image
-        src="/testi.png"
+        src="/ss1.png"
         alt="Testimonial"
         layout="fill"
         objectFit="cover"
-        className="opacity-80"
+        className="opacity-90"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex items-center">
         <div className="p-8 text-white max-w-xl">
